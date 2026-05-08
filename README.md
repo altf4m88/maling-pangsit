@@ -108,6 +108,33 @@ Jendela aplikasi akan terbuka dengan **dua tab**: Data Anggota dan Data Buku.
 
 ---
 
+## Cara Membaca Kode (untuk Pemula)
+
+Jika kamu baru pertama kali melihat proyek ini, baca file-file berikut **secara berurutan**. Setiap file lebih mudah dipahami setelah membaca file sebelumnya.
+
+### 1. `DatabaseConnection.java` — Mulai di sini
+File terpendek dan tersederhana. Hanya berisi satu method `getConnection()` yang menghubungkan aplikasi ke MySQL. Ini adalah padanan langsung dari `config.php`.
+
+### 2. `Anggota.java` dan `Buku.java` — Pahami bentuk datanya
+Di PHP, satu baris hasil query disimpan sebagai `$row['nama']`. Di Java, kita butuh kelas khusus untuk menampungnya. Kedua file ini hanya berisi field dan getter — tidak ada logika sama sekali.
+
+### 3. `BukuDAO.java` — Lihat cara SQL dijalankan
+Baca ini sebelum `AnggotaDAO.java` karena kolom tabel `buku` lebih familiar (judul, pengarang, dll). Di sini kamu akan melihat bagaimana `PreparedStatement` menggantikan `mysqli_query()`. Perhatikan pola yang sama diulang di keempat method: buka koneksi → siapkan query → isi nilai → eksekusi → tutup.
+
+### 4. `AddBukuDialog.java` — Lihat cara form bekerja
+Setara dengan `create.php`. Di PHP, form dikirim via `POST` lalu PHP menangkapnya. Di Java, user mengisi `JTextField` lalu menekan tombol — tombol itu punya `ActionListener` yang menjalankan logika yang sama. Bandingkan blok `btnSimpan.addActionListener(...)` di sini dengan blok `if(isset($_POST['submit']))` di `create.php`.
+
+### 5. `EditBukuDialog.java` — Lihat cara form pre-filled bekerja
+Setara dengan `edit.php`. Perhatikan bagaimana constructor menerima objek `Buku` dan langsung menggunakannya untuk mengisi nilai awal setiap field (`new JTextField(buku.getJudul())`). Bandingkan dengan `value="<?php echo $row['judul']; ?>"` di HTML.
+
+### 6. `MainFrame.java` — Lihat semuanya tersambung
+File terbesar. Di sini semua komponen digabungkan: `JTabbedPane` menampung dua panel, setiap panel punya tabel dan tombol, setiap tombol membuka dialog yang sudah kamu pelajari di langkah sebelumnya. Baca method `createBukuPanel()` terlebih dahulu, lalu `createAnggotaPanel()` karena polanya identik.
+
+### 7. `MainApp.java` — Titik masuk
+File terakhir dan tersederhana kedua. Hanya memanggil `new MainFrame()`. Baca ini terakhir agar kamu sudah paham apa yang dibuat oleh `MainFrame`.
+
+---
+
 ## Troubleshooting
 
 **Error: `Communications link failure`**
