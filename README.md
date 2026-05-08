@@ -1,4 +1,4 @@
-<img width="1179" height="580" alt="Screenshot 2026-05-08 at 16 58 50" src="https://github.com/user-attachments/assets/d73a48e8-230b-4018-b422-a09427461c97" />
+
 Aplikasi desktop CRUD untuk mengelola data **Anggota** dan **Buku** perpustakaan. Dibangun dengan **Java Swing** (UI) dan **JDBC** (koneksi database), tanpa framework tambahan.
 
 ---
